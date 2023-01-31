@@ -13,6 +13,10 @@ swrds = []  # list of words being compared in ordering
 fwrds = []  # final list of words
 match = False  # to check whether or not there was a match
 fwrd = []
+counter = -1
+
+
+
 
 # open words file
 my_file = open("Crossword/words.txt", "r")    # opening the file in 'read' mode
@@ -68,8 +72,7 @@ for litter in wrds:
     swrds.append(sletters)
 
 def compare (first_letter, second_letter):
-    match = False  # if false at end of comparison, skips order
-
+    match = False
     acounter = 0  # checks location of matched "a" letters
     for ab in first_letter:
         bcounter = 0  # checks location of matched "b" letters
@@ -83,146 +86,38 @@ def compare (first_letter, second_letter):
                 break
             
             bcounter += 1
-
         acounter += 1
         if match == True:
             break
 
     return match
+wurd = list(swrds)
+def comparer (u):
+    counter += 1
+    while match != True:
+        t = random.choice(wurd)
+        wurd.remove(t)
+        match = compare(t, u)
+    match = False
+    lister.append(t)
+    return t
+    
+
+a = random.choice(wurd)
+wurd.remove(a)
+
+lister = [a]
+b = comparer(random.choice(lister))
+c = comparer(random.choice(lister))
+d = comparer(random.choice(lister))
+e = comparer(random.choice(lister))
+f = comparer(random.choice(lister))
+g = comparer(random.choice(lister))
+h = comparer(random.choice(lister))
+i = comparer(random.choice(lister))
+j = comparer(random.choice(lister))
 
 
-for a in swrds:
-    for b in swrds:
-        if a != b:  # to avoid duplicates
-            counter = 0  # number added to the matches to differentiate between them
-            an = list(a)
-            bn = list(b)
-            match = compare(an, bn)
-            if match == True:  # it only will keep comparing if there is a match
-                for c in swrds:
-                    if a != c and b != c:  # to avoid duplicates
-                        cn = list(c)
-                        counter = 1  # number added to the matches to differentiate between them
-                        match = compare(bn, cn)  # first compares c to b
-                        if match == False:
-                            match = compare(an, cn)
-                        
-                        if match == True:
-                            for d in swrds:
-                                if a != d and b != d and c != d:  # to avoid duplicates
-                                    counter = 2  # number added to the matches to differentiate between them
-                                    dn = list(d)
-                                    match = compare (cn, dn)
-                                    if match == False:
-                                        match = compare(bn, dn)
-                                    if match == False:
-                                        match = compare(an, dn)
-                                    
-                                    if match == True:
-                                        for e in swrds:
-                                            if a != e and b != e and c != e and d != e:  # to avoid duplicates
-                                                counter = 3  # number added to the matches to differentiate between them
-                                                en = list(e)
-                                                match = compare(dn, en)
-                                                if match == False:
-                                                    match = compare(cn, en)
-                                                if match == False:
-                                                    match = compare(bn, en)
-                                                if match == False:
-                                                    match == compare(an, en)
-                                                
-                                                if match == True:
-                                                    for f in swrds:
-                                                        if a != f and b != f and c != f and d != f and e != f:  # to avoid duplicates
-                                                            counter = 4  # number added to the matches to differentiate between them
-                                                            fn = list(f)
-                                                            match = compare(en, fn)
-                                                            if match == False:
-                                                                match == compare(dn, fn)
-                                                            if match == False:
-                                                                match == compare(cn, fn)
-                                                            if match == False:
-                                                                match = compare(bn, fn)
-                                                            if match == False:
-                                                                compare(an, fn)
-                                                            
-                                                            if match == True:
-                                                                for g in swrds:
-                                                                    if a != g and b != g and c != g and d != g and e != g and f != g:  # to avoid duplicates
-                                                                        counter = 5  # number added to the matches to differentiate between them
-                                                                        gn = list(g)
-                                                                        match = compare (fn, gn)
-                                                                        if match == False:
-                                                                            match == compare(en, gn)
-                                                                        if match == False:
-                                                                            match = compare(dn, gn)
-                                                                        if match == False:
-                                                                            match == compare(cn, gn)
-                                                                        if match == False:
-                                                                            match = compare(bn, gn)
-                                                                        if match == False:
-                                                                            match = compare(an, gn)
-                                                                        
-                                                                        if match == True:    
-                                                                            for h in swrds:
-                                                                                if a != h and b!= h and c != h and d != h and e != h and f != h and g != h:  # to avoid duplicates
-                                                                                    counter = 6  # number added to the matches to differentiate between them
-                                                                                    hn = list(h)
-                                                                                    match = compare(gn, hn)
-                                                                                    if match == False:
-                                                                                        match = compare(fn, hn)
-                                                                                    if match == False:
-                                                                                        match == compare(en, hn)
-                                                                                    if match == False:
-                                                                                        match = compare(dn, hn)
-                                                                                    if match == False:
-                                                                                        match == compare(cn, hn)
-                                                                                    if match == False:
-                                                                                        match = compare(bn, hn)
-                                                                                    if match == False:
-                                                                                        match = compare(an, hn)
-                                                                                    
-                                                                                    if match == True:
-                                                                                        for i in swrds:
-                                                                                            if a != i and b != i and c != i and d != i and e != i and f != i and g != i and h != i:  # to avoid duplicates
-                                                                                                iN = list(i)
-                                                                                                match = compare(hn, iN)
-                                                                                                if match == False:
-                                                                                                    match = compare(gn, iN)
-                                                                                                if match == False:
-                                                                                                    match = compare(fn, iN)
-                                                                                                if match == False:
-                                                                                                    match = compare(en, iN)
-                                                                                                if match == False:
-                                                                                                    match = compare(dn, iN)
-                                                                                                if match == False:
-                                                                                                    match = compare(cn, iN)
-                                                                                                if match == False:
-                                                                                                    match = compare(bn, iN)
-                                                                                                if match == False:
-                                                                                                    match = compare(an, iN)
-                                                                                                
-                                                                                                if match == True:
-
-                                                                                                    for j in swrds:
-                                                                                                        if a != j and b != j and c != j and d != j and e != j and f != j and g != j and h != j and i != j:  # to avoid duplicates
-                                                                                                            jn = list(j)
-                                                                                                            match = compare(iN, jn)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-                                                                                                            # need to continue pattern here
-                                                                                                            if match == True:
-                                                                                                                cwrd = []
-                                                                                                                cwrd.append(an)
-                                                                                                                
-                                                                                                                cwrd.append(bn)
-                                                                                                                cwrd.append(cn)
-                                                                                                                cwrd.append(dn)
-                                                                                                                cwrd.append(en)
-                                                                                                                cwrd.append(fn)
-                                                                                                                cwrd.append(gn)
-                                                                                                                cwrd.append(hn)
-                                                                                                                cwrd.append(iN)
-                                                                                                                cwrd.append(jn)
-                                                                                                                fwrd.append(cwrd)
 
 # print(fwrd)
 # puts items into window and closes words file
