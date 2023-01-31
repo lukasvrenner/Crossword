@@ -93,7 +93,7 @@ def compare (first_letter, second_letter):
     return match
 wurd = list(swrds)
 def comparer (u):
-    counter += 1
+
     while match != True:
         t = random.choice(wurd)
         wurd.remove(t)
@@ -102,19 +102,27 @@ def comparer (u):
     lister.append(t)
     return t
     
-
 a = random.choice(wurd)
 wurd.remove(a)
 
 lister = [a]
+counter += 1
 b = comparer(random.choice(lister))
+counter += 1
 c = comparer(random.choice(lister))
+counter += 1
 d = comparer(random.choice(lister))
+counter += 1
 e = comparer(random.choice(lister))
+counter += 1
 f = comparer(random.choice(lister))
+counter += 1
 g = comparer(random.choice(lister))
+counter += 1
 h = comparer(random.choice(lister))
+counter += 1
 i = comparer(random.choice(lister))
+counter += 1
 j = comparer(random.choice(lister))
 
 
