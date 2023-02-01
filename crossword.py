@@ -46,6 +46,7 @@ my_file.close()
 # turns the previous list into a list of lists; word and then definition
 for i in np.arange(0, len(data_into_list) + 1, 2):
     wordslist.append(data_into_list[i:i+2])
+wordslist.remove(wordslist[-1])
     
 for i in range (100):
     counter = -1
@@ -64,6 +65,7 @@ for i in range (100):
             sletters.append(spbitter)
         swrds.append(sletters)
     lister = [swrds[0]]
+    
     counter += 1
     compare(random.choice(lister), swrds [1])
     lister.append(swrds [1])
