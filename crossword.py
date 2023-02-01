@@ -8,7 +8,7 @@ squarey = 0  # y coordinate of squares
 sqrsize = 20  # size of squares
 wordslist = []  # list of words and definitions/clues
 
-dfntn = []  # list of definitions/clues
+
 fwrds = []  # final list of words
 match = False  # to check whether or not there was a match
 
@@ -22,6 +22,7 @@ def compare (first_letter, second_letter):
  
         for bb in second_letter:
             if ab == bb:
+                # counter is added to matched letters, so that matched letters can be tracked
                 first_letter[acounter].append (counter)  # adds counter to matched letters
                 second_letter[bcounter].append (counter)  # adds counter to matched letters
                 match = True  # shows that a match was found, allowing more computation to be ran
@@ -46,11 +47,14 @@ my_file.close()
 # turns the previous list into a list of lists; word and then definition
 for i in np.arange(0, len(data_into_list) + 1, 2):
     wordslist.append(data_into_list[i:i+2])
-wordslist.remove(wordslist[-1])
-    
+wordslist.remove(wordslist[-1])  # last item is [], so this is removed to avoid errors
+
+
+# this part is done 100 times to find the best solution of words   
 for i in range (100):
-    counter = -1
+    counter = -1  # later used to count positions of words
     wrds = []  # list of words
+    dfntn = []  # list of definitions/clues
 
     swrds = []  # list of words being compared in ordering
     words = random.sample(wordslist, k = 10)   # selects random words + definitions (still paired) and makes them into a new list
@@ -65,6 +69,8 @@ for i in range (100):
             sletters.append(spbitter)
         swrds.append(sletters)
     lister = [swrds[0]]
+    
+    # the following section compares the letters of the list
     
     counter += 1
     compare(random.choice(lister), swrds [1])
