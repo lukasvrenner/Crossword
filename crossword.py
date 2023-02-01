@@ -50,8 +50,8 @@ for i in np.arange(0, len(data_into_list) + 1, 2):
 wordslist.remove(wordslist[-1])  # last item is [], so this is removed to avoid errors
 
 
-# this part is done 100 times to find the best solution of words   
-for i in range (100):
+# this part is done 1000 times to find the best solution of words   
+for i in range (1000):
     counter = -1  # later used to count positions of words
     wrds = []  # list of words
     dfntn = []  # list of definitions/clues
@@ -73,43 +73,44 @@ for i in range (100):
     # the following section compares the letters of the list
     
     counter += 1
-    compare(random.choice(lister), swrds [1])
+    match1 = compare(random.choice(lister), swrds [1])
     lister.append(swrds [1])
     
     counter += 1
-    compare(random.choice(lister), swrds [2])
+    match2 = compare(random.choice(lister), swrds [2])
     lister.append(swrds[2])
     
     counter += 1
-    compare(random.choice(lister), swrds [3])
+    match3 = compare(random.choice(lister), swrds [3])
     lister.append(swrds[3])
     
     counter += 1
-    compare(random.choice(lister), swrds [4])
+    match4 = compare(random.choice(lister), swrds [4])
     lister.append(swrds[4])
     
     counter += 1
-    compare(random.choice(lister), swrds [5])
+    match5 = compare(random.choice(lister), swrds [5])
     lister.append(swrds[5])
     
     counter += 1
-    compare(random.choice(lister), swrds [6])
+    match6 = compare(random.choice(lister), swrds [6])
     lister.append(swrds[6])
     
     counter += 1
-    compare(random.choice(lister), swrds [7])
+    match7 = compare(random.choice(lister), swrds [7])
     lister.append(swrds[7])
     
     counter += 1
-    compare(random.choice(lister), swrds [8])
+    match8 = compare(random.choice(lister), swrds [8])
     lister.append(swrds[8])
     
     counter += 1
-    compare(random.choice(lister), swrds [9])
+    match9 = compare(random.choice(lister), swrds [9])
     
-    fwrds.append(swrds)
+    if match1 == True and match2 == True and match3 == True and match4 == True and match5 == True and match6 == True and match7 == True and match8 == True and match9 == True:
+        fwrds.append(swrds)
 
-    
+print(len(fwrds))
 
 
 
