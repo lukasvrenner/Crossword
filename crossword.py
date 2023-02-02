@@ -23,8 +23,8 @@ def compare (first_letter, second_letter):
         for bb in second_letter:
             if ab == bb:
                 # counter is added to matched letters, so that matched letters can be tracked
-                first_letter[acounter].append (counter)  # adds counter to matched letters
-                second_letter[bcounter].append (counter)  # adds counter to matched letters
+                first_letter[acounter].append (count)  # adds counter to matched letters
+                second_letter[bcounter].append (count)  # adds counter to matched letters
                 match = True  # shows that a match was found, allowing more computation to be ran
                 break
             
@@ -52,7 +52,8 @@ wordslist.remove(wordslist[-1])  # last item is [], so this is removed to avoid 
 
 # this part is done 1000 times to find the best solution of words   
 for i in range (1000):
-    counter = -1  # later used to count positions of words
+    fmatch = True
+    counter = []  # later used to count positions of words
     wrds = []  # list of words
     dfntn = []  # list of definitions/clues
 
@@ -71,46 +72,19 @@ for i in range (1000):
     lister = [swrds[0]]
     
     # the following section compares the letters of the list
+    for count in range(1, 10):
+        counter.append(compare(random.choice(lister), swrds [count]))
+        lister.append(swrds [count])
     
-    counter += 1
-    match1 = compare(random.choice(lister), swrds [1])
-    lister.append(swrds [1])
-    
-    counter += 1
-    match2 = compare(random.choice(lister), swrds [2])
-    lister.append(swrds[2])
-    
-    counter += 1
-    match3 = compare(random.choice(lister), swrds [3])
-    lister.append(swrds[3])
-    
-    counter += 1
-    match4 = compare(random.choice(lister), swrds [4])
-    lister.append(swrds[4])
-    
-    counter += 1
-    match5 = compare(random.choice(lister), swrds [5])
-    lister.append(swrds[5])
-    
-    counter += 1
-    match6 = compare(random.choice(lister), swrds [6])
-    lister.append(swrds[6])
-    
-    counter += 1
-    match7 = compare(random.choice(lister), swrds [7])
-    lister.append(swrds[7])
-    
-    counter += 1
-    match8 = compare(random.choice(lister), swrds [8])
-    lister.append(swrds[8])
-    
-    counter += 1
-    match9 = compare(random.choice(lister), swrds [9])
-    
-    if match1 == True and match2 == True and match3 == True and match4 == True and match5 == True and match6 == True and match7 == True and match8 == True and match9 == True:
+    # checks whether each found a match
+    for check in counter:
+        if check == False:
+            fmatch = False
+            
+    if fmatch == True:     
         fwrds.append(swrds)
 
-print(len(fwrds))
+print(fwrds[-1])
 
 
 
