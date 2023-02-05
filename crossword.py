@@ -36,7 +36,7 @@ def compare (first_letter, second_letter):
     return match
 
 # open words file
-my_file = open("Crossword/words.txt", "r")    # opening the file in 'read' mode
+my_file = open("words.txt", "r")    # opening the file in 'read' mode
 data = my_file.read()   # reading the file
 
 # removes all new lines, and splits strings on the '.'s into a list
@@ -50,8 +50,8 @@ for i in np.arange(0, len(data_into_list) + 1, 2):
 wordslist.remove(wordslist[-1])  # last item is [], so this is removed to avoid errors
 
 
-# this part is done 1000 times to find the best solution of words   
-for i in range (1000):
+# this part is done 10000 times to find the best solution of words   
+for i in range (10000):
     fmatch = True
     counter = []  # later used to count positions of words
     wrds = []  # list of words
@@ -75,6 +75,15 @@ for i in range (1000):
     for count in range(1, 10):
         counter.append(compare(random.choice(lister), swrds [count]))
         lister.append(swrds [count])
+    
+    for adder in swrds:
+        for addder in adder:
+            if len(addder) == 1:
+                addder.append(0)
+                
+    
+        
+    
     
     # checks whether each found a match
     for check in counter:
