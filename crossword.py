@@ -26,6 +26,16 @@ def compare (first_letter, second_letter):
                 # counter is added to matched letters, so that matched letters can be tracked
                 first_letter[acounter].append (count)  # adds counter to matched letters
                 second_letter[bcounter].append (count)  # adds counter to matched letters
+                
+                # sets verticle or horizontal
+                try:
+                    if globals()['vh' + str(swrds.index(first_letter))] == 0:
+                        globals()['vh' + str(swrds[count])] = 1
+                    else:
+                        globals()['vh' + str(swrds[count])] = 0
+                except:
+                    pass
+                # distance from begining of each word to the match
                 globals()['dif' + str(count)] = [acounter, bcounter]
                 match = True  # shows that a match was found, allowing more computation to be ran
                 break
@@ -58,6 +68,7 @@ wordslist.remove(wordslist[-1])  # last item is [], so this is removed to avoid 
 
 # this part is done 10000 times to find the best solution of words   
 for i in range (10000):
+    vh0 = 0  # 0 for horizontal, 1 for verticle
     fmatch = True
     counter = []  # later used to count positions of words
     wrds = []  # list of words
@@ -101,7 +112,23 @@ for i in range (10000):
                     
                     
         
-        
+        xpos = 0
+        ypos = 0
+        for stuff in swrds:
+            
+            if globals()['vh' + str(swrds.index(stuff))] == 0:
+                for things in stuff:
+                    things.append(xpos)
+                    things.append(ypos)
+                    xpos += 1
+            else:
+                for things in stuff:
+                    things.append(xpos)
+                    things.append(ypos)
+                    ypos += 1
+            xpos += globals()['dif' + str(swrds.index(stuff)+ 1)] [0]
+            ypos -= globals()['dif' + str(swrds.index(stuff) + 1)] [1]
+                    
                     
                     
         fwrds.append(swrds)
