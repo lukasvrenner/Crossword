@@ -30,13 +30,13 @@ def compare (first_letter, second_letter):
                 # sets verticle or horizontal
                 try:
                     if globals()['vh' + str(swrds.index(first_letter))] == 0:
-                        globals()['vh' + str(swrds[count])] = 1
+                        globals()['vh' + str(count)] = 1
                     else:
-                        globals()['vh' + str(swrds[count])] = 0
+                        globals()['vh' + str(count)] = 0
                 except:
                     pass
                 # distance from begining of each word to the match
-                globals()['dif' + str(count)] = [acounter, bcounter]
+                globals()['dif' + str(count)] = [acounter - len(first_letter), bcounter]
                 match = True  # shows that a match was found, allowing more computation to be ran
                 break
             
@@ -126,8 +126,9 @@ for i in range (10000):
                     things.append(xpos)
                     things.append(ypos)
                     ypos += 1
-            xpos += globals()['dif' + str(swrds.index(stuff)+ 1)] [0]
-            ypos -= globals()['dif' + str(swrds.index(stuff) + 1)] [1]
+            if swrds.index(stuff)!=9:
+                xpos += globals()['dif' + str(swrds.index(stuff)+1)] [0]
+                ypos -= globals()['dif' + str(swrds.index(stuff)+1)] [1]
                     
                     
                     
@@ -159,9 +160,10 @@ for definition in fdfntn[-1]:
 for wrd in wrds:
     # puts squares into place
     # WILL BE MODIFIED
-    for f in wrd:
-        w.create_rectangle(squarex, squarey, squarex + sqrsize, squarey + sqrsize, fill="white", outline = 'black')
-        squarex += sqrsize
+    for f in fwrds[-1]:
+        for lttr in f:
+            w.create_rectangle(lttr[-2]*sqrsize, lttr[-1]*sqrsize, lttr[-2]*sqrsize+ sqrsize, lttr[-1]*sqrsize*sqrsize, fill="white", outline = 'black')
+
 
     # changes box positions -- DELETE!
     squarex = 0
