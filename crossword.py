@@ -10,6 +10,7 @@ wordslist = []  # list of words and definitions/clues
 
 
 fwrds = []  # final list of words
+fdfntn = []
 match = False  # to check whether or not there was a match
 
 
@@ -25,6 +26,7 @@ def compare (first_letter, second_letter):
                 # counter is added to matched letters, so that matched letters can be tracked
                 first_letter[acounter].append (count)  # adds counter to matched letters
                 second_letter[bcounter].append (count)  # adds counter to matched letters
+                globals()['dif' + str(count)] = [acounter, bcounter]
                 match = True  # shows that a match was found, allowing more computation to be ran
                 break
             
@@ -48,6 +50,10 @@ my_file.close()
 for i in np.arange(0, len(data_into_list) + 1, 2):
     wordslist.append(data_into_list[i:i+2])
 wordslist.remove(wordslist[-1])  # last item is [], so this is removed to avoid errors
+
+
+
+
 
 
 # this part is done 10000 times to find the best solution of words   
@@ -76,12 +82,9 @@ for i in range (10000):
         counter.append(compare(random.choice(lister), swrds [count]))
         lister.append(swrds [count])
     
-    for adder in swrds:
-        for addder in adder:
-            if len(addder) == 1:
-                addder.append(0)
-                
     
+                
+
         
     
     
@@ -91,14 +94,22 @@ for i in range (10000):
             fmatch = False
             
     if fmatch == True:     
+        for adder in swrds:
+            for addder in adder:
+                if len(addder) == 1:
+                    addder.append(0)
+                    
+                    
+        
+        
+                    
+                    
         fwrds.append(swrds)
+        fdfntn.append(dfntn)
+
+
 
 print(fwrds[-1])
-
-
-
-    
-
 
 
 # the following section is for creating the window
@@ -116,7 +127,7 @@ l = Label(root, text = "Clues")   # sets title of widget
 
 
 
-for definition in dfntn:
+for definition in fdfntn[-1]:
     T.insert('end', definition + "\n \n")   #displays clues
 for wrd in wrds:
     # puts squares into place
