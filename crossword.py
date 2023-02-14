@@ -139,6 +139,13 @@ for i in range (10000):
 
 print(fwrds[-1])
 
+for this in fwrds:
+    for that in this:
+        for no in that:
+            for yes in that:
+                if yes[-1] == no[-1] and yes[-2] == no[-2] and yes != no:
+                    fwrds.remove[this]
+
 
 # the following section is for creating the window
 root = Tk()   # root is the window
