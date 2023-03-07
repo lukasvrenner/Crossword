@@ -54,12 +54,13 @@ def compare (first_letter, second_letter):
 
     return match
 
+# calculate the positon of each letter in a word
 def pos (word, init_x, init_y, vh):
     x = int(init_x)
     y = int(init_y)
     for lttr in word:
-        lttr.append(y)
         lttr.append(x)
+        lttr.append(y)
         if vh == 0:
             x += 1
         else:
@@ -89,12 +90,14 @@ wordslist.remove(wordslist[-1])  # last item is [], so this is removed to avoid 
 for i in range (10000):
     vh0 = 0  # 0 for horizontal, 1 for verticle
     fmatch = True
-    counter = []  # later used to count positions of words
+    match_counter = []  # later used to count positions of words
     wrds = []  # list of words
     dfntn = []  # list of definitions/clues
-
     swrds = []  # list of words being compared in ordering
     words = random.sample(wordslist, k = 10)   # selects random words + definitions (still paired) and makes them into a new list
+    
+
+
     for j in words:
         wrds.append(j[0])
         dfntn.append(j[1])
@@ -118,8 +121,9 @@ for i in range (10000):
 
 
 
+
     # checks whether each found a match
-    for check in counter:
+    for check in match_counter:
         if check == False:
             fmatch = False
 
@@ -192,47 +196,47 @@ for i in range (10000):
 
 print(fwrds[-1])
 
-# for this in fwrds:
-#     for that in this:
-#         for no in that:
-#             for yes in that:
-#                 if yes[-1] == no[-1] and yes[-2] == no[-2] and yes != no:
-#                     fwrds.remove[this]
+for this in fwrds:
+    for that in this:
+        for no in that:
+            for yes in that:
+                if yes[-1] == no[-1] and yes[-2] == no[-2] and yes != no:
+                    fwrds.remove[this]
 
 
-# # the following section is for creating the window
-# root = Tk()   # root is the window
-# root.title("Crossword Puzzle")   # sets the title of the window
-# root.geometry("1000x1000")   # sets size and shape of window
+# the following section is for creating the window
+root = Tk()   # root is the window
+root.title("Crossword Puzzle")   # sets the title of the window
+root.geometry("1000x1000")   # sets size and shape of window
 
-# # canvas
-# w = Canvas(root, width=400, height=400)   # creates a canvas widget, allowing shapes to be drawn inside the window
-# w.create_rectangle(0, 0, 400, 400, fill="black", outline = 'white')   # black background for the puzzle
+# canvas
+w = Canvas(root, width=400, height=400)   # creates a canvas widget, allowing shapes to be drawn inside the window
+w.create_rectangle(0, 0, 400, 400, fill="black", outline = 'white')   # black background for the puzzle
 
-# # text for clues
-# T = Text(root, height = 400, width = 400, wrap='word')   # creates a text widget for clues
-# l = Label(root, text = "Clues")   # sets title of widget
-
-
-
-# for definition in fdfntn[-1]:
-#     T.insert('end', definition + "\n \n")   #displays clues
-# for wrd in wrds:
-#     # puts squares into place
-#     # WILL BE MODIFIED
-#     for f in fwrds[-1]:
-#         for lttr in f:
-#             w.create_rectangle(lttr[-2]*sqrsize, lttr[-1]*sqrsize, lttr[-2]*sqrsize+ sqrsize, lttr[-1]*sqrsize*sqrsize, fill="white", outline = 'black')
+# text for clues
+T = Text(root, height = 400, width = 400, wrap='word')   # creates a text widget for clues
+l = Label(root, text = "Clues")   # sets title of widget
 
 
-#     # changes box positions -- DELETE!
-#     squarex = 0
-#     squarey += sqrsize * 2
 
-# # print(fwrd)
-# # puts items into window and closes words file
-# T.configure(state='disabled')   # disables the ability to edit the text widget after the program has been run
-# w.pack()
-# l.pack()
-# T.pack()
-# root.mainloop()
+for definition in fdfntn[-1]:
+    T.insert('end', definition + "\n \n")   #displays clues
+for wrd in wrds:
+    # puts squares into place
+    # WILL BE MODIFIED
+    for f in fwrds[-1]:
+        for lttr in f:
+            w.create_rectangle(lttr[-2]*sqrsize, lttr[-1]*sqrsize, lttr[-2]*sqrsize+ sqrsize, lttr[-1]*sqrsize*sqrsize, fill="white", outline = 'black')
+
+
+    # changes box positions -- DELETE!
+    squarex = 0
+    squarey += sqrsize * 2
+
+# print(fwrd)
+# puts items into window and closes words file
+T.configure(state='disabled')   # disables the ability to edit the text widget after the program has been run
+w.pack()
+l.pack()
+T.pack()
+root.mainloop()
