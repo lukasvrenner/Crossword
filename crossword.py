@@ -35,7 +35,7 @@ def compare (first_letter, second_letter):
 
                     else:
                         globals()['vh' + str(count)] = 0
-                        globals()['dif' + str(count)] = [-acounter, -bcounter]
+                        globals()['dif' + str(count)] = [-bcounter, -acounter]
                 except:
                     pass
                 globals()['match' + str(count)] = swrds.index(first_letter)
@@ -158,7 +158,7 @@ for i in range (10000):
         ypos7 = globals()['ypos' + str(match7)] - dif7[1]
         swrds[7] = pos(swrds[7], xpos7, ypos7, vh7)
         xpos8 = globals()['xpos' + str(match8)] + dif8[0]
-        ypos8 = globals()['ypos' + str(match8)] + dif8[1]
+        ypos8 = globals()['ypos' + str(match8)] - dif8[1]
         swrds[8] = pos(swrds[8], xpos8, ypos8, vh8)
         xpos9 = globals()['xpos' + str(match9)] + dif9[0]
         ypos9 = globals()['ypos' + str(match9)] - dif9[1]
@@ -169,14 +169,34 @@ for i in range (10000):
         fdfntn.append(dfntn)
 
 
-
-
+print(len(fwrds))
+# DOES NOT WORK
 for this in fwrds:
     for that in this:
         for no in that:
             for yes in that:
                 if yes[-1] == no[-1] and yes[-2] == no[-2] and yes != no:
                     fwrds.remove[this]
+print(len(fwrds))
+for each in fwrds:
+    max_left = 0
+    max_up = 0
+    max_right = 0
+    max_down = 0
+    for every in each:
+        for one in every:
+            if one[-2] < max_left:
+                max_left = one[-2]
+            if one[-1] < max_up:
+                max_up = one[-1]
+            if one[-2] > max_right:
+                max_right = one[-2]
+            if one[-1] > max_down:
+                max_down = one[-1]
+    for a_word in each:
+        for a_letter in a_word:
+            a_letter[-2] -= max_left
+            a_letter[-1] -= max_up
 
 
 print(fwrds[-1])
@@ -186,12 +206,12 @@ root.title("Crossword Puzzle")   # sets the title of the window
 root.geometry("1000x1000")   # sets size and shape of window
 
 # canvas
-w = Canvas(root, width=400, height=400)   # creates a canvas widget, allowing shapes to be drawn inside the window
-w.create_rectangle(0, 0, 400, 400, fill="black", outline = 'white')   # black background for the puzzle
+w = Canvas(root, width=(max_right-max_left+1)*sqrsize, height=(max_down-max_up+1)*sqrsize)   # creates a canvas widget, allowing shapes to be drawn inside the window
+w.create_rectangle(0, 0, (max_right-max_left+1)*sqrsize, (max_down-max_up+1)*sqrsize, fill="black", outline = 'white')   # black background for the puzzle
 
 # text for clues
 T = Text(root, height = 400, width = 400, wrap='word')   # creates a text widget for clues
-l = Label(root, text = "Clues")   # sets title of widget
+l = Label(root, text = "\nClues")   # sets title of widget
 
 
 
@@ -204,10 +224,10 @@ for wrd in wrds:
         for lttr in f:
             w.create_rectangle(lttr[-2]*sqrsize, lttr[-1]*sqrsize, lttr[-2]*sqrsize+ sqrsize, lttr[-1]*sqrsize+sqrsize, fill="white", outline = 'black')
 
+for wrd_answer in fwrds[-1]:
+    for lttr_answer in wrd_answer:
+        w.create_text(lttr_answer[-2]*sqrsize+10, lttr_answer[-1]*sqrsize+10, text=lttr_answer[0])
 
-    # changes box positions -- DELETE!
-    squarex = 0
-    squarey += sqrsize * 2
 
 # puts items into window and closes words file
 T.configure(state='disabled')   # disables the ability to edit the text widget after the program has been run
