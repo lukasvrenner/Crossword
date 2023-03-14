@@ -31,16 +31,11 @@ def compare (first_letter, second_letter):
                 try:
                     if globals()['vh' + str(swrds.index(first_letter))] == 0:
                         globals()['vh' + str(count)] = 1
+                        globals()['dif' + str(count)] = [acounter, bcounter]
+
                     else:
                         globals()['vh' + str(count)] = 0
-                except:
-                    pass
-                # distance from begining of each word to the match
-                try:
-                    if globals()['vh' + str(swrds.index(first_letter))] == 0:
-                        globals()['dif' + str(count)] = [acounter, bcounter]
-                    else:
-                        globals()['dif' + str(count)] = [acounter, bcounter]
+                        globals()['dif' + str(count)] = [-acounter, -bcounter]
                 except:
                     pass
                 globals()['match' + str(count)] = swrds.index(first_letter)
@@ -53,6 +48,7 @@ def compare (first_letter, second_letter):
             break
 
     return match
+
 
 # calculate the positon of each letter in a word
 def pos (word, init_x, init_y, vh):
@@ -112,7 +108,7 @@ for i in range (10000):
 
     # the following section compares the letters of the list
     for count in range(1, 10):
-        counter.append(compare(random.choice(lister), swrds [count]))
+        match_counter.append(compare(random.choice(lister), swrds [count]))
         lister.append(swrds [count])
 
 
@@ -162,39 +158,18 @@ for i in range (10000):
         ypos7 = globals()['ypos' + str(match7)] - dif7[1]
         swrds[7] = pos(swrds[7], xpos7, ypos7, vh7)
         xpos8 = globals()['xpos' + str(match8)] + dif8[0]
-        ypos8 = globals()['ypos' + str(match8)] - dif8[1]
+        ypos8 = globals()['ypos' + str(match8)] + dif8[1]
         swrds[8] = pos(swrds[8], xpos8, ypos8, vh8)
         xpos9 = globals()['xpos' + str(match9)] + dif9[0]
         ypos9 = globals()['ypos' + str(match9)] - dif9[1]
         swrds[9] = pos(swrds[9], xpos9, ypos9, vh9)
         
 
-        # xpos = 0
-        # ypos = 0
-        # for stuff in swrds:
-
-        #     if globals()['vh' + str(swrds.index(stuff))] == 0:
-        #         for things in stuff:
-        #             things.append(xpos)
-        #             things.append(ypos)
-        #             xpos += 1
-        #     else:
-        #         for things in stuff:
-        #             things.append(xpos)
-        #             things.append(ypos)
-        #             ypos += 1
-        #     if swrds.index(stuff)!=9:
-        #         xpos += globals()['dif' + str(swrds.index(stuff)+1)] [0]
-        #         ypos -= globals()['dif' + str(swrds.index(stuff)+1)] [1]
-
-
-
         fwrds.append(swrds)
         fdfntn.append(dfntn)
 
 
 
-print(fwrds[-1])
 
 for this in fwrds:
     for that in this:
@@ -204,6 +179,7 @@ for this in fwrds:
                     fwrds.remove[this]
 
 
+print(fwrds[-1])
 # the following section is for creating the window
 root = Tk()   # root is the window
 root.title("Crossword Puzzle")   # sets the title of the window
@@ -226,14 +202,13 @@ for wrd in wrds:
     # WILL BE MODIFIED
     for f in fwrds[-1]:
         for lttr in f:
-            w.create_rectangle(lttr[-2]*sqrsize, lttr[-1]*sqrsize, lttr[-2]*sqrsize+ sqrsize, lttr[-1]*sqrsize*sqrsize, fill="white", outline = 'black')
+            w.create_rectangle(lttr[-2]*sqrsize, lttr[-1]*sqrsize, lttr[-2]*sqrsize+ sqrsize, lttr[-1]*sqrsize+sqrsize, fill="white", outline = 'black')
 
 
     # changes box positions -- DELETE!
     squarex = 0
     squarey += sqrsize * 2
 
-# print(fwrd)
 # puts items into window and closes words file
 T.configure(state='disabled')   # disables the ability to edit the text widget after the program has been run
 w.pack()
