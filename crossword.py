@@ -165,17 +165,16 @@ for i in range (10000):
         ypos9 = globals()['ypos' + str(match9)] - dif9[1]
         swrds[9] = pos(swrds[9], xpos9, ypos9, vh9)
         
-        for this in swrds:
-            for that in this:
-                for other in this:
-                    if that[-1] == other [-1] and that[-2] == other [-2] and that != other:
-                        works = False
-                        print(works)
+        all_letters = [word for sublist in swrds for word in sublist]
+        for that in all_letters:
+            for other in all_letters:
+                if that[-1] == other [-1] and that[-2] == other [-2] and that != other:
+                    works = False
         if works == True:
             fwrds.append(swrds)
             fdfntn.append(dfntn)
 
-
+print(len(fwrds))
 
 for each in fwrds:
     max_left = 0
