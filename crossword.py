@@ -91,6 +91,7 @@ for i in range (10000):
     dfntn = []  # list of definitions/clues
     swrds = []  # list of words being compared in ordering
     words = random.sample(wordslist, k = 10)   # selects random words + definitions (still paired) and makes them into a new list
+    works = True
     
 
 
@@ -164,20 +165,18 @@ for i in range (10000):
         ypos9 = globals()['ypos' + str(match9)] - dif9[1]
         swrds[9] = pos(swrds[9], xpos9, ypos9, vh9)
         
+        for this in swrds:
+            for that in this:
+                for other in this:
+                    if that[-1] == other [-1] and that[-2] == other [-2] and that != other:
+                        works = False
+                        print(works)
+        if works == True:
+            fwrds.append(swrds)
+            fdfntn.append(dfntn)
 
-        fwrds.append(swrds)
-        fdfntn.append(dfntn)
 
 
-print(len(fwrds))
-# DOES NOT WORK
-for this in fwrds:
-    for that in this:
-        for no in that:
-            for yes in that:
-                if yes[-1] == no[-1] and yes[-2] == no[-2] and yes != no:
-                    fwrds.remove[this]
-print(len(fwrds))
 for each in fwrds:
     max_left = 0
     max_up = 0
