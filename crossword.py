@@ -3,9 +3,7 @@ import random
 import numpy as np
 from tkinter import *
 
-squarex = 0  # x coordinate of squares
-squarey = 0  # y coordinate of squares
-sqrsize = 20  # size of squares
+sqrsize = 30  # size of squares
 wordslist = []  # list of words and definitions/clues
 
 
@@ -174,7 +172,6 @@ for i in range (10000):
             fwrds.append(swrds)
             fdfntn.append(dfntn)
 
-print(len(fwrds))
 
 for each in fwrds:
     max_left = 0
@@ -197,7 +194,6 @@ for each in fwrds:
             a_letter[-1] -= max_up
 
 
-print(fwrds[-1])
 # the following section is for creating the window
 root = Tk()   # root is the window
 root.title("Crossword Puzzle")   # sets the title of the window
@@ -212,19 +208,32 @@ T = Text(root, height = 400, width = 400, wrap='word')   # creates a text widget
 l = Label(root, text = "\nClues")   # sets title of widget
 
 
+# Verticle clues
+T.insert('end', "Verticle: \n")
+for defindex, definition in enumerate(fdfntn[-1]):
+    if fwrds[-1] [defindex] [0] [-2] == fwrds[-1] [defindex] [1] [-2]:
+        T.insert('end', str(defindex+1)+"." + definition + "\n")   #displays clues
 
-for definition in fdfntn[-1]:
-    T.insert('end', definition + "\n \n")   #displays clues
-for wrd in wrds:
-    # puts squares into place
-    # WILL BE MODIFIED
-    for f in fwrds[-1]:
-        for lttr in f:
-            w.create_rectangle(lttr[-2]*sqrsize, lttr[-1]*sqrsize, lttr[-2]*sqrsize+ sqrsize, lttr[-1]*sqrsize+sqrsize, fill="white", outline = 'black')
+# Horizontal Clues
+T.insert('end', "\n\nHorizontal:\n")
+for defindex, definition in enumerate(fdfntn[-1]):
+    if fwrds[-1] [defindex] [0] [-2] != fwrds[-1] [defindex] [1] [-2]:
+        T.insert('end', str(defindex+1)+"." + definition + "\n")   #displays clues
 
-for wrd_answer in fwrds[-1]:
-    for lttr_answer in wrd_answer:
-        w.create_text(lttr_answer[-2]*sqrsize+10, lttr_answer[-1]*sqrsize+10, text=lttr_answer[0])
+# puts squares into place
+index_counter = 1
+for wrd_index, f in enumerate(fwrds[-1]):
+    for lttr in f:
+        w.create_rectangle(lttr[-2]*sqrsize, lttr[-1]*sqrsize, lttr[-2]*sqrsize+ sqrsize, lttr[-1]*sqrsize+sqrsize, fill="white", outline = 'black')
+    w.create_text(f[0][-2]*sqrsize + 7, f[0] [-1]*sqrsize+6, text=wrd_index+1)
+
+
+
+"""displays the correct words in the canvas"""
+# Add a button to toggle this
+# for wrd_answer in fwrds[-1]:
+    # for lttr_answer in wrd_answer:
+        # w.create_text(lttr_answer[-2]*sqrsize+10, lttr_answer[-1]*sqrsize+10, text=lttr_answer[0])
 
 
 # puts items into window and closes words file
